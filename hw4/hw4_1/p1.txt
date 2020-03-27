@@ -2,3 +2,16 @@ Authors:
 	Abby Rechkin
 	Alex Yavnilovitch
 Explanation of Part 1 tests
+
+p1-1.asm:
+	This test targets EX-EX forwarding.
+	The forwarding is to be used between instruction 3 (subi) and instruction 4 (add).
+	There is a RAW dependency, because we are writing to r2 and then immediately reading from r2.
+p1-2.asm:
+	This test targets MEM-EX forwarding.
+	The forwarding is to be used between instruction 5 (ld) and instruction 6 (add).
+	There is a RAW dependency, because we are loading into r1, and then immediately rasing the contents of r1.
+p1-3.asm:
+	This test targets MEM-MEM forwarding.
+	The forwarding occurs between instruction 5 (ld) and instruction 6 (st).
+	It is necessary to use Mem-Mem forwarding, because we are loading into one register r1, and then using its value to store to memory.
