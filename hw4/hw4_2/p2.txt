@@ -3,3 +3,21 @@ Authors:
 	Alex Yavnilovitch
 Explanation of tests in Part 2:
 
+p2-1.asm:
+	This test exemplifies how the 'predict taken' policy for branching is useful. In this case, 
+	we want to branch to the HALT instruction on line 6, instead of performing an addition addi operation (inst. 5).
+	Since we are using the 'predict taken' policy, we will immediately go to HALT, and will not have to fllush the addi operation.
+
+p2-2.asm:
+	This test exemplifies how the 'predict NOT taken' policy for branching is useful. In this case,
+	we expect that the instructions after the BRANCH condition are executed (because the condition does not hold: r2 = 0). Thus,
+	we are performing the addi operation on line 5. This is expecially important, because the operation under label1 (line 6) is dependent
+	upon the addi instruction. Furthermore, if 'predict taken' policy was used instead, the instruction on line 6 (add) would have to be stalled, 
+	and wait for the resolution of the branch condition.
+
+Problem 2.c:
+	Branch prediction will take 1 cycle when the prediction is correct. However, if the prediction is incorrect, we must pay a 1 cycle penalty.
+	Since our branch prediction is performed in the DECODE stage, the worst case penalty is having to flush an incorrect instruction that entered the FETCH
+	stage. To reiterate, if the prediction is incorrect, we will have 2 cycles dedicated to branch prediction: one cycle determines whether the branch is taken, and another
+	flushes the incorrect fetched instruction.
+
